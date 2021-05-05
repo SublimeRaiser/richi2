@@ -1,10 +1,12 @@
 {
+    "name": "ryabkov/richi",
+    "description": "The project that makes me richer",
     "type": "project",
     "license": "proprietary",
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
-        "php": ">=7.2.5",
+        "php": "^8.0",
         "ext-ctype": "*",
         "ext-iconv": "*",
         "symfony/console": "5.2.*",
@@ -24,12 +26,12 @@
     },
     "autoload": {
         "psr-4": {
-            "App\\": "src/"
+            "Richi\\": "src/Richi/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "App\\Tests\\": "tests/"
+            "Richi\\Tests\\": "tests/Richi/"
         }
     },
     "replace": {
