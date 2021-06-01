@@ -13,7 +13,7 @@ doctrine:
         mappings:
             Richi:
                 is_bundle: false
-                type: annotation
-                dir: '%kernel.project_dir%/src/Richi/CashFlow/Domain/Model'
+                type: xml
+                dir: '%kernel.project_dir%/src/Richi/CashFlow/Infrastructure/Persistence/Doctrine/Mapping'
                 prefix: 'Richi\CashFlow\Domain\Model'
                 alias: Richi
