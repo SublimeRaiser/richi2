@@ -1,0 +1,11 @@
+version: '3'
+services:
+  cashflow-php-cli:
+    build:
+      context: ./docker
+      dockerfile: ./php-cli.docker
+    volumes:
+      - .:/app
+      - composer:/root/.composer/cache
+volumes:
+  composer:
