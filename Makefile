@@ -32,7 +32,7 @@ composer-install:
 
 ##
 ## Code quality tests ("make tests")
-## -------------------------------
+## ---------------------------------
 tests: phpunit
 
 ##
