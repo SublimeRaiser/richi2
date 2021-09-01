@@ -5,8 +5,8 @@ SYMFONY_CONSOLE = $(CLI) ./bin/console
 .PHONY: tests phpunit
 
 ##
-## Project initialization ("make init" or just "make")
-## ---------------------------------------------------
+## Project provisioning ("make init" or just "make")
+## -------------------------------------------------
 all: init
 init: docker-down-clear docker-pull docker-build docker-up composer-install #db-init
 
@@ -27,6 +27,9 @@ docker-build:
 
 composer-install:
 	$(CLI) composer install
+
+composer-update:
+	$(CLI) composer update
 
 #db-init: wait-db migations fixtures
 
