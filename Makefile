@@ -35,5 +35,16 @@ composer-install:
 ## -------------------------------
 tests: phpunit
 
+##
+## Run unit tests ("make phpunit" or "make phpunit UnitTest.php"), PHPUnit options are not supported!
+## --------------------------------------------------------------------------------------------------
+# If the first argument is "phpunit"...
+ifeq (phpunit,$(firstword $(MAKECMDGOALS)))
+    # use the rest as arguments for "phpunit"
+    PHPUNIT_ARGS := $(wordlist 2,$(words $(MAKECMDGOALS)),$(MAKECMDGOALS))
+    # ...and turn them into do-nothing targets
+    $(eval $(PHPUNIT_ARGS):;@:)
+endif
+
 phpunit:
-	$(CLI) ./bin/phpunit
+	$(CLI) ./bin/phpunit $(PHPUNIT_ARGS)
