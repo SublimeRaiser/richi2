@@ -38,6 +38,9 @@ composer-update:
 ## ---------------------------------
 tests: phpunit
 
+phpunit:
+	$(CLI) ./bin/phpunit
+
 ##
 ## Run unit tests ("make phpunit" or "make phpunit UnitTest.php"), PHPUnit options are not supported!
 ## --------------------------------------------------------------------------------------------------
@@ -50,4 +53,20 @@ ifeq (phpunit,$(firstword $(MAKECMDGOALS)))
 endif
 
 phpunit:
+	echo $(PHPUNIT_ARGS)
 	$(CLI) ./bin/phpunit $(PHPUNIT_ARGS)
+
+##
+## Execute CLI command ("make cli './bin/phpunit --filter testOne UnitTest.php'"
+## (single quotes are only needed when there are some command options like --filter)
+## ---------------------------------------------------------------------------------
+# If the first argument is "cli"...
+ifeq (cli,$(firstword $(MAKECMDGOALS)))
+    # use the rest as arguments for "cli"
+    CLI_ARGS := $(wordlist 2,$(words $(MAKECMDGOALS)),$(MAKECMDGOALS))
+    # ...and turn them into do-nothing targets
+    $(eval $(CLI_ARGS):;@:)
+endif
+
+cli:
+	$(CLI) $(CLI_ARGS)
