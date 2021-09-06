@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Richi\CashFlow\Application\Account;
 
-use Richi\CashFlow\Domain\Model\Account\Account;
-use Richi\CashFlow\Domain\Model\Account\AccountRepositoryInterface;
+use Richi\CashFlow\Domain\Account\Account;
+use Richi\CashFlow\Domain\Account\AccountRepositoryInterface;
 
 /**
  * @author Nikolay Ryabkov <ZeroGravity.82@gmail.com>

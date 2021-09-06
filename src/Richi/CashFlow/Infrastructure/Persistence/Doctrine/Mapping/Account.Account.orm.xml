@@ -4,7 +4,7 @@
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                           https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
-    <entity name="Richi\CashFlow\Domain\Model\Account\Account" table="account">
+    <entity name="Richi\CashFlow\Domain\Account\Account" table="account">
         <id name="id" type="integer" column="id">
             <generator strategy="AUTO"/>
             <sequence-generator sequence-name="tablename_seq" allocation-size="100" initial-value="1" />

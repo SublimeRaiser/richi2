@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Richi\CashFlow\Domain\Model\Account;
+namespace Richi\CashFlow\Domain\Account;
 
-use Richi\CashFlow\Domain\Model\DomainIdInterface;
+use Richi\CashFlow\Domain\DomainIdInterface;
 
 /**
  * @author Nikolay Ryabkov <ZeroGravity.82@gmail.com>

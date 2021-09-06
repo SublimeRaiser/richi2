@@ -15,5 +15,5 @@ doctrine:
                 is_bundle: false
                 type: xml
                 dir: '%kernel.project_dir%/src/Richi/CashFlow/Infrastructure/Persistence/Doctrine/Mapping'
-                prefix: 'Richi\CashFlow\Domain\Model'
+                prefix: 'Richi\CashFlow\Domain'
                 alias: Richi

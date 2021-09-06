@@ -6,9 +6,9 @@ namespace Richi\CashFlow\Infrastructure\Domain\Model\Account;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Ramsey\Uuid\Uuid;
-use Richi\CashFlow\Domain\Model\Account\Account;
-use Richi\CashFlow\Domain\Model\Account\AccountId;
-use Richi\CashFlow\Domain\Model\Account\AccountRepositoryInterface;
+use Richi\CashFlow\Domain\Account\Account;
+use Richi\CashFlow\Domain\Account\AccountId;
+use Richi\CashFlow\Domain\Account\AccountRepositoryInterface;
 
 /**
  * @author Nikolay Ryabkov <ZeroGravity.82@gmail.com>

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Richi\Tests\CashFlow\Application\Account;
 
 use PHPUnit\Framework\TestCase;
-use Richi\CashFlow\Domain\Model\Account\Account;
+use Richi\CashFlow\Domain\Account\Account;
 
 class CreateTest extends TestCase
 {
