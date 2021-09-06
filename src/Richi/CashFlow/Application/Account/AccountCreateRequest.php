@@ -7,7 +7,7 @@ namespace Richi\CashFlow\Application\Account;
 /**
  * @author Nikolay Ryabkov <ZeroGravity.82@gmail.com>
  */
-class AccountCreateRequest
+final class AccountCreateRequest
 {
     /**
      * @var string

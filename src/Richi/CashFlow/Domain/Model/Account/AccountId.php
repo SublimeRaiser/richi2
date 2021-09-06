@@ -9,7 +9,7 @@ use Richi\CashFlow\Domain\Model\DomainIdInterface;
 /**
  * @author Nikolay Ryabkov <ZeroGravity.82@gmail.com>
  */
-class AccountId implements DomainIdInterface
+final class AccountId implements DomainIdInterface
 {
     /**
      * @var string

@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route as Route;
  *
  * @author Nikolay Ryabkov <ZeroGravity.82@gmail.com>
  */
-class AccountController extends AbstractController
+final class AccountController extends AbstractController
 {
     /**
      * @Route("/", name="account_index")

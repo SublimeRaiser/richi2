@@ -9,7 +9,7 @@ use Richi\CashFlow\Domain\Model\EntityInterface;
 /**
  * @author Nikolay Ryabkov <ZeroGravity.82@gmail.com>
  */
-class Account implements EntityInterface
+final class Account implements EntityInterface
 {
     /**
      * @var AccountId

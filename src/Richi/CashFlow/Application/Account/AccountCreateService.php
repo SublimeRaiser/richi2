@@ -10,7 +10,7 @@ use Richi\CashFlow\Domain\Model\Account\AccountRepositoryInterface;
 /**
  * @author Nikolay Ryabkov <ZeroGravity.82@gmail.com>
  */
-class AccountCreateService
+final class AccountCreateService
 {
     /**
      * @var AccountRepositoryInterface

@@ -13,7 +13,7 @@ use Richi\CashFlow\Domain\Model\Account\AccountRepositoryInterface;
 /**
  * @author Nikolay Ryabkov <ZeroGravity.82@gmail.com>
  */
-class DoctrineAccountRepository implements AccountRepositoryInterface
+final class DoctrineAccountRepository implements AccountRepositoryInterface
 {
     /**
      * @var EntityManagerInterface
