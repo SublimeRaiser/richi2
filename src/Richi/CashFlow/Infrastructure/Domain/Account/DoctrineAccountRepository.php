@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Richi\CashFlow\Infrastructure\Domain\Model\Account;
+namespace Richi\CashFlow\Infrastructure\Domain\Account;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Ramsey\Uuid\Uuid;
