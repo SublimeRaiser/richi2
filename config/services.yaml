@@ -10,23 +10,24 @@ services:
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+
     # autowiring
     Richi\CashFlow\Domain\Account\AccountRepositoryInterface: '@Richi\CashFlow\Infrastructure\Domain\Account\DoctrineAccountRepository'
 
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
-    Richi\CashFlow\:
-        resource: '../src/Richi/CashFlow/'
+    Richi\:
+        resource: '../src/Richi/'
         exclude:
-            - '../src/Richi/CashFlow/Domain/Model/'
             - '../src/Richi/Kernel.php'
             - '../tests/Richi/'
 
     # controllers are imported separately to make sure services can be injected
     # as action arguments even if you don't extend any base controller class
-    Richi\CashFlow\Infrastructure\Delivery\Http\:
+    controllers:
+        namespace: Richi\CashFlow\Infrastructure\Delivery\Http\
         resource: '../src/Richi/CashFlow/Infrastructure/Delivery/Http/'
         tags: ['controller.service_arguments']
 
-    # add more service definitions when explicit configuration is needed
-    # please note that last definitions always *replace* previous ones
+    # third-party services
+    Ramsey\Uuid\UuidFactory: ~
