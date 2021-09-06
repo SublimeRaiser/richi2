@@ -2,7 +2,7 @@ DOCKER_COMPOSE  = docker-compose
 CLI             = $(DOCKER_COMPOSE) run --rm cashflow-php-cli
 SYMFONY_CONSOLE = $(CLI) ./bin/console
 
-.PHONY: tests phpunit
+.PHONY: tests phpunit dummy
 
 ##
 ## Project provisioning ("make init" or just "make")
@@ -39,15 +39,29 @@ composer-update:
 tests: phpunit
 
 ##
-## Run unit tests ("make phpunit" or "make phpunit UnitTest.php"), PHPUnit options are not supported!
-## --------------------------------------------------------------------------------------------------
+## Run unit tests ("make -- phpunit --filter testOne UnitTest.php")
+## ----------------------------------------------------------------
 # If the first argument is "phpunit"...
 ifeq (phpunit,$(firstword $(MAKECMDGOALS)))
     # use the rest as arguments for "phpunit"
     PHPUNIT_ARGS := $(wordlist 2,$(words $(MAKECMDGOALS)),$(MAKECMDGOALS))
     # ...and turn them into do-nothing targets
-    $(eval $(PHPUNIT_ARGS):;@:)
+    $(eval $(PHPUNIT_ARGS):dummy;@:)
 endif
 
 phpunit:
 	$(CLI) ./bin/phpunit $(PHPUNIT_ARGS)
+
+##
+## Execute CLI command ("make -- cli ls -la /app")
+## -----------------------------------------------
+# If the first argument is "cli"...
+ifeq (cli,$(firstword $(MAKECMDGOALS)))
+    # use the rest as arguments for "cli"
+    CLI_ARGS := $(wordlist 2,$(words $(MAKECMDGOALS)),$(MAKECMDGOALS))
+    # ...and turn them into do-nothing targets
+    $(eval $(CLI_ARGS):dummy;@:)
+endif
+
+cli:
+	$(CLI) $(CLI_ARGS)
