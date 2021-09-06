@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Richi\CashFlow\Infrastructure\Domain\Account;
+namespace Richi\CashFlow\Infrastructure\Domain\Account\DoctrineORM;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Ramsey\Uuid\Uuid;
@@ -13,7 +13,7 @@ use Richi\CashFlow\Domain\Account\AccountRepositoryInterface;
 /**
  * @author Nikolay Ryabkov <ZeroGravity.82@gmail.com>
  */
-final class DoctrineAccountRepository implements AccountRepositoryInterface
+final class DoctrineORMAccountRepository implements AccountRepositoryInterface
 {
     /**
      * @var EntityManagerInterface
