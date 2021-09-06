@@ -4,47 +4,21 @@ declare(strict_types=1);
 
 namespace Richi\CashFlow\Domain\Account;
 
-use Richi\CashFlow\Domain\DomainIdInterface;
+use Richi\CashFlow\Domain\AbstractDomainEntityId;
 
 /**
  * @author Nikolay Ryabkov <ZeroGravity.82@gmail.com>
  */
-final class AccountId implements DomainIdInterface
+final class AccountId extends AbstractDomainEntityId
 {
-    /**
-     * @var string
-     */
-    private string $id;
-
     /**
      * @param string $id
      */
-    public function __construct(string $id)
+    protected function setId(string $id): void
     {
+        if ($id === '') {
+            throw new \InvalidArgumentException('Account ID cannot be empty string.');
+        }
         $this->id = $id;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function __toString(): string
-    {
-        return $this->toString();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function equals(DomainIdInterface $id): bool
-    {
-        return $this === $id;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function toString(): string
-    {
-        return $this->id;
     }
 }
