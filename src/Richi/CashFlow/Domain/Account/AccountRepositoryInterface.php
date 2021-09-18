@@ -10,18 +10,27 @@ namespace Richi\CashFlow\Domain\Account;
 interface AccountRepositoryInterface
 {
     /**
-     * Generates and returns the ID for an account.
-     *
-     * @return AccountId
-     */
-    public function nextId(): AccountId;
-
-    /**
-     * Adds the account to the repository.
+     * Adds the account to the repository. If the account already exist, it will be updated.
      *
      * @param Account $account
      */
-    public function add(Account $account): void;
+    public function save(Account $account): void;
+
+    /**
+     * Adds the collection of accounts to the repository. If any of the accounts already exist, they will be updated.
+     *
+     * @param AccountCollection $accounts
+     */
+    public function saveAll(AccountCollection $accounts): void;
+
+    /**
+     * Returns the account by ID. If no account found, null will be returned.
+     *
+     * @param AccountId $accountId
+     *
+     * @return Account|null
+     */
+    public function findById(AccountId $accountId): ?Account;
 
     /**
      * Removes the account from the repository.
@@ -29,4 +38,11 @@ interface AccountRepositoryInterface
      * @param Account $account
      */
     public function remove(Account $account): void;
+
+    /**
+     * Removes the collection of accounts from the repository.
+     *
+     * @param AccountCollection $accounts
+     */
+    public function removeAll(AccountCollection $accounts): void;
 }
