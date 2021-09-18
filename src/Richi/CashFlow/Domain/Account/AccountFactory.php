@@ -7,7 +7,7 @@ namespace Richi\CashFlow\Domain\Account;
 use Richi\CashFlow\Domain\IdentityGeneratorInterface;
 
 /**
- * @author Nikolay Ryabkov <nikolay.ryabkov@sibers.com>
+ * @author Nikolay Ryabkov <ZeroGravity.82@gmail.com>
  */
 final class AccountFactory
 {

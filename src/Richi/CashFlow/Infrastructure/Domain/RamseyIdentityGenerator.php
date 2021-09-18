@@ -8,7 +8,7 @@ use Richi\CashFlow\Domain\IdentityGeneratorInterface;
 use Ramsey\Uuid\UuidFactory;
 
 /**
- * @author Nikolay Ryabkov <nikolay.ryabkov@sibers.com>
+ * @author Nikolay Ryabkov <ZeroGravity.82@gmail.com>
  */
 final class RamseyIdentityGenerator implements IdentityGeneratorInterface
 {
