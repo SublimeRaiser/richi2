@@ -14,6 +14,6 @@ doctrine:
             Richi:
                 is_bundle: false
                 type: xml
-                dir: '%kernel.project_dir%/src/Richi/CashFlow/Infrastructure/Persistence/Doctrine/Mapping'
+                dir: '%kernel.project_dir%/src/Richi/CashFlow/Infrastructure/Persistence/DoctrineORM/Mapping'
                 prefix: 'Richi\CashFlow\Domain'
                 alias: Richi
