@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Richi\CashFlow\Infrastructure\Domain\Account\DoctrineORM;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Ramsey\Uuid\Uuid;
 use Richi\CashFlow\Domain\Account\Account;
+use Richi\CashFlow\Domain\Account\AccountCollection;
 use Richi\CashFlow\Domain\Account\AccountId;
 use Richi\CashFlow\Domain\Account\AccountRepositoryInterface;
 
@@ -31,17 +31,27 @@ final class DoctrineORMAccountRepository implements AccountRepositoryInterface
     /**
      * {@inheritdoc}
      */
-    public function nextId(): AccountId
+    public function save(Account $account): void
     {
-        return new AccountId(Uuid::uuid4()->toString());
+        $this->getEntityManager()->persist($account);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function add(Account $account): void
+    public function saveAll(AccountCollection $accounts): void
     {
-        $this->getEntityManager()->persist($account);
+        foreach ($accounts as $account) {
+            $this->save($account);
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function findById(AccountId $accountId): ?Account
+    {
+        return $this->getEntityManager()->find(Account::class, (string) $accountId);
     }
 
     /**
@@ -50,6 +60,16 @@ final class DoctrineORMAccountRepository implements AccountRepositoryInterface
     public function remove(Account $account): void
     {
         $this->getEntityManager()->remove($account);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeAll(AccountCollection $accounts): void
+    {
+        foreach ($accounts as $account) {
+            $this->remove($account);
+        }
     }
 
     /**
