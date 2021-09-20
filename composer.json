@@ -22,6 +22,7 @@
         "symfony/yaml": "5.2.*"
     },
     "require-dev": {
+        "dg/bypass-finals": "^1.3",
         "phpunit/phpunit": "^9.5",
         "symfony/browser-kit": "^5.2",
         "symfony/css-selector": "^5.2",
@@ -44,7 +45,8 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Richi\\Tests\\": "tests/Richi/"
+            "Richi\\Tests\\": "tests/Richi/",
+            "Hook\\": "tests/Hook/"
         }
     },
     "replace": {
