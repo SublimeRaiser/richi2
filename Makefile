@@ -1,11 +1,11 @@
-DOCKER_COMPOSE  = docker-compose
-CLI             = $(DOCKER_COMPOSE) run --rm cashflow-php-cli
-SYMFONY_CONSOLE = $(CLI) ./bin/console
+DOCKER_COMPOSE = docker-compose
+CLI            = $(DOCKER_COMPOSE) run --rm cashflow-php-cli
+SYMFONY        = $(CLI) ./bin/console
 
 getargs    = $(wordlist 2,$(words $(MAKECMDGOALS)),$(MAKECMDGOALS))
 escapeagrs = $(subst :,\:,$(1))
 
-.PHONY: tests phpunit dummy cli
+.PHONY: dummy tests phpunit cli symfony
 
 ##
 ## Project provisioning ("make init" or just "make")
@@ -45,7 +45,7 @@ phpunit:
 	$(CLI) ./vendor/bin/phpunit $(PHPUNIT_ARGS)
 
 ##
-## Execute CLI command ("make -- cli ls -la /app")
+## Run CLI command ("make -- cli ls -la /app")
 ## -----------------------------------------------
 ifeq (cli,$(firstword $(MAKECMDGOALS)))
     CLI_ARGS         := $(call getargs)
@@ -54,3 +54,14 @@ ifeq (cli,$(firstword $(MAKECMDGOALS)))
 endif
 cli:
 	$(CLI) $(CLI_ARGS)
+
+##
+## Run Symfony console command ("make symfony doctrine:migrations:migrate")
+## -----------------------------------------------
+ifeq (symfony,$(firstword $(MAKECMDGOALS)))
+    SYMFONY_ARGS         := $(call getargs)
+    SYMFONY_ARGS_ESCAPED := $(call escapeagrs, $(SYMFONY_ARGS))
+    $(eval $(SYMFONY_ARGS_ESCAPED):dummy;@:)
+endif
+symfony:
+	$(SYMFONY) $(SYMFONY_ARGS)
