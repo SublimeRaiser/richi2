@@ -5,7 +5,7 @@ SYMFONY_CONSOLE = $(CLI) ./bin/console
 getargs    = $(wordlist 2,$(words $(MAKECMDGOALS)),$(MAKECMDGOALS))
 escapeagrs = $(subst :,\:,$(1))
 
-.PHONY: tests phpunit dummy cli run
+.PHONY: tests phpunit dummy cli
 
 ##
 ## Project provisioning ("make init" or just "make")
