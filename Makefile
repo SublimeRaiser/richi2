@@ -58,10 +58,10 @@ cli:
 ##
 ## Run Symfony console command ("make symfony doctrine:migrations:migrate")
 ## -----------------------------------------------
-ifeq (symfony,$(firstword $(MAKECMDGOALS)))
+ifeq (sf,$(firstword $(MAKECMDGOALS)))
     SYMFONY_ARGS         := $(call getargs)
     SYMFONY_ARGS_ESCAPED := $(call escapeagrs, $(SYMFONY_ARGS))
     $(eval $(SYMFONY_ARGS_ESCAPED):dummy;@:)
 endif
-symfony:
+sf:
 	$(SYMFONY) $(SYMFONY_ARGS)
