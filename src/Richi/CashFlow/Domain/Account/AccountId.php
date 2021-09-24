@@ -11,14 +11,4 @@ use Richi\CashFlow\Domain\AbstractDomainEntityId;
  */
 final class AccountId extends AbstractDomainEntityId
 {
-    /**
-     * @param string $id
-     */
-    protected function setId(string $id): void
-    {
-        if ($id === '') {
-            throw new \InvalidArgumentException('Account ID cannot be empty string.');
-        }
-        $this->id = $id;
-    }
 }

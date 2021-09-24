@@ -12,17 +12,11 @@ use Richi\CashFlow\Domain\IdentityGeneratorInterface;
 final class AccountFactory
 {
     /**
-     * @var IdentityGeneratorInterface
-     */
-    private IdentityGeneratorInterface $identityGenerator;
-
-    /**
      * @param IdentityGeneratorInterface $identityGenerator
      */
-    public function __construct(IdentityGeneratorInterface $identityGenerator)
-    {
-        $this->identityGenerator = $identityGenerator;
-    }
+    public function __construct(
+        private IdentityGeneratorInterface $identityGenerator
+    ) {}
 
     /**
      * Creates an object for the account.
@@ -40,7 +34,7 @@ final class AccountFactory
         ?string $description,
         ?string $icon,
         int $initialBalance,
-        bool $archived
+        bool $archived,
     ): Account {
         $nextId = new AccountId($this->getIdentityGenerator()->getNextIdentity());
 

@@ -10,19 +10,14 @@ namespace Richi\CashFlow\Domain;
 abstract class AbstractDomainEntityCollection implements \Countable, \IteratorAggregate
 {
     /**
-     * @var AbstractDomainEntity[]|array
-     */
-    private array $entities;
-
-    /**
      * @param array $entities
      */
-    public function __construct(array $entities = [])
-    {
+    public function __construct(
+        private array $entities = [],
+    ) {
         foreach ($entities as $entity) {
             $this->assertValidType($entity);
         }
-        $this->entities = $entities;
     }
 
     /**
@@ -68,7 +63,7 @@ abstract class AbstractDomainEntityCollection implements \Countable, \IteratorAg
         if (!isset($this->entities[$entityId])) {
             throw new \LogicException(\sprintf(
                 'Entity of type %s with ID %s is not found.',
-                $this->getEntityClass(),
+                $this->getSupportedEntityClass(),
                 $entityId
             ));
         }
@@ -201,11 +196,11 @@ abstract class AbstractDomainEntityCollection implements \Countable, \IteratorAg
     }
 
     /**
-     * Returns the name of the entity class.
+     * Returns the name of the supported entity class.
      *
      * @return string
      */
-    abstract public function getEntityClass(): string;
+    abstract public function getSupportedEntityClass(): string;
 
     /**
      * Checks whether the entity is of a type supported by the collection.
@@ -216,10 +211,11 @@ abstract class AbstractDomainEntityCollection implements \Countable, \IteratorAg
      */
     private function assertValidType(AbstractDomainEntity $entity): void
     {
-        if (\get_class($entity) !== $this->getEntityClass()) {
+        $supportedEntityClass = $this->getSupportedEntityClass();
+        if (!$entity instanceof $supportedEntityClass) {
             throw new \InvalidArgumentException(\sprintf(
                 'Invalid type for an entity: expected "%s", "%s" given.',
-                $this->getEntityClass(),
+                $this->getSupportedEntityClass(),
                 \get_debug_type($entity)
             ));
         }

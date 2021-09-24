@@ -16,17 +16,11 @@ use Richi\CashFlow\Domain\Account\AccountRepositoryInterface;
 final class DoctrineORMAccountRepository implements AccountRepositoryInterface
 {
     /**
-     * @var EntityManagerInterface
-     */
-    private EntityManagerInterface $entityManager;
-
-    /**
      * @param EntityManagerInterface $entityManager
      */
-    public function __construct(EntityManagerInterface $entityManager)
-    {
-        $this->entityManager = $entityManager;
-    }
+    public function __construct(
+        private EntityManagerInterface $entityManager,
+    ) {}
 
     /**
      * {@inheritdoc}

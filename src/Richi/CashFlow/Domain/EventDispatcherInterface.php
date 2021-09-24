@@ -14,6 +14,8 @@ interface EventDispatcherInterface
      *
      * @param string   $eventClassName
      * @param callable $listener
+     *
+     * @throws \LogicException when the event listener of the same type has already been added
      */
     public function addListener(string $eventClassName, callable $listener): void;
 

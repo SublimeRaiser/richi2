@@ -14,7 +14,7 @@ final class AccountCollection extends AbstractDomainEntityCollection
     /**
      * {@inheritdoc}
      */
-    public function getEntityClass(): string
+    public function getSupportedEntityClass(): string
     {
         return Account::class;
     }

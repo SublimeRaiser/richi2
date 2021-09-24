@@ -13,17 +13,11 @@ use Ramsey\Uuid\UuidFactory;
 final class RamseyIdentityGenerator implements IdentityGeneratorInterface
 {
     /**
-     * @var UuidFactory
-     */
-    private UuidFactory $uuidFactory;
-
-    /**
      * @param UuidFactory $uuidFactory
      */
-    public function __construct(UuidFactory $uuidFactory)
-    {
-        $this->uuidFactory = $uuidFactory;
-    }
+    public function __construct(
+        private UuidFactory $uuidFactory,
+    ) {}
 
     /**
      * {@inheritdoc}

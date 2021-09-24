@@ -10,16 +10,12 @@ namespace Richi\CashFlow\Domain;
 abstract class AbstractDomainEntityId
 {
     /**
-     * @var string
-     */
-    protected string $id;
-
-    /**
      * @param string $value
      */
-    public function __construct(string $value)
-    {
-        $this->setId($value);
+    public function __construct(
+        protected string $value,
+    ) {
+        $this->assertValidValue($value);
     }
 
     /**
@@ -27,15 +23,15 @@ abstract class AbstractDomainEntityId
      */
     public function __toString(): string
     {
-        return $this->getId();
+        return $this->getValue();
     }
 
     /**
      * @return string
      */
-    public function getId(): string
+    public function getValue(): string
     {
-        return $this->id;
+        return $this->value;
     }
 
     /**
@@ -45,17 +41,26 @@ abstract class AbstractDomainEntityId
      */
     public function isEqual(self $id): bool
     {
-        return $id->getId() === $this->getId();
+        return $id->getValue() === $this->getValue();
     }
 
     /**
-     * @param string $id
+     * @param string $value
      */
-    protected function setId(string $id): void
+    protected function assertValidValue(string $value): void
     {
-        if ($id === '') {
+        $this->assertNotEmpty($value);
+    }
+
+    /**
+     * @param string $value
+     *
+     * @throws \InvalidArgumentException when the ID is an empty string
+     */
+    private function assertNotEmpty(string $value): void
+    {
+        if ($value === '') {
             throw new \InvalidArgumentException('Domain entity ID cannot be empty string.');
         }
-        $this->id = $id;
     }
 }

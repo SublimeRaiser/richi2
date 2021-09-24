@@ -12,36 +12,6 @@ use Richi\CashFlow\Domain\AbstractAggregateRoot;
 final class Account extends AbstractAggregateRoot
 {
     /**
-     * @var AccountId
-     */
-    private AccountId $id;
-
-    /**
-     * @var string
-     */
-    private string $name;
-
-    /**
-     * @var string|null
-     */
-    private ?string $description;
-
-    /**
-     * @var string|null
-     */
-    private ?string $icon;
-
-    /**
-     * @var int
-     */
-    private int $initialBalance;
-
-    /**
-     * @var bool
-     */
-    private bool $archived;
-
-    /**
      * @param AccountId   $id
      * @param string      $name
      * @param string|null $description
@@ -50,20 +20,13 @@ final class Account extends AbstractAggregateRoot
      * @param bool        $archived
      */
     public function __construct(
-        AccountId $id,
-        string $name,
-        ?string $description,
-        ?string $icon,
-        int $initialBalance,
-        bool $archived
-    ) {
-        $this->id             = $id;
-        $this->name           = $name;
-        $this->description    = $description;
-        $this->icon           = $icon;
-        $this->initialBalance = $initialBalance;
-        $this->archived       = $archived;
-    }
+        private AccountId $id,
+        private string $name,
+        private ?string $description,
+        private ?string $icon,
+        private int $initialBalance,
+        private bool $archived,
+    ) {}
 
     /**
      * {@inheritdoc}
