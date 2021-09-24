@@ -31,6 +31,8 @@ abstract class AbstractAggregateRoot extends AbstractDomainEntity
      * Records the domain event of the aggregate root for subsequent release.
      *
      * @param DomainEventInterface $event
+     *
+     * @throws \LogicException when the event of the same type has already been recorded
      */
     protected function recordEvent(DomainEventInterface $event): void
     {
