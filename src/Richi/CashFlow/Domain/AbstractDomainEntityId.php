@@ -15,11 +15,11 @@ abstract class AbstractDomainEntityId
     protected string $id;
 
     /**
-     * @param string $id
+     * @param string $value
      */
-    public function __construct(string $id)
+    public function __construct(string $value)
     {
-        $this->setId($id);
+        $this->setId($value);
     }
 
     /**
