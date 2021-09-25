@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Richi\CashFlow\Domain\Account;
 
 use Richi\CashFlow\Domain\AbstractAggregateRoot;
+use Richi\CashFlow\Domain\EntityId;
 
 /**
  * @author Nikolay Ryabkov <ZeroGravity.82@gmail.com>
@@ -12,7 +13,7 @@ use Richi\CashFlow\Domain\AbstractAggregateRoot;
 final class Account extends AbstractAggregateRoot
 {
     /**
-     * @param AccountId   $id
+     * @param EntityId    $id
      * @param string      $name
      * @param string|null $description
      * @param string|null $icon
@@ -20,18 +21,18 @@ final class Account extends AbstractAggregateRoot
      * @param bool        $archived
      */
     public function __construct(
-        private AccountId $id,
-        private string $name,
-        private ?string $description,
-        private ?string $icon,
-        private int $initialBalance,
-        private bool $archived,
+        private EntityId $id,
+        private string   $name,
+        private ?string  $description,
+        private ?string  $icon,                // Icon (VO)
+        private int      $initialBalance,      // Amount (VO)
+        private bool     $archived,
     ) {}
 
     /**
      * {@inheritdoc}
      */
-    public function getId(): AccountId
+    public function getId(): EntityId
     {
         return $this->id;
     }

@@ -10,9 +10,9 @@ namespace Richi\CashFlow\Domain;
 abstract class AbstractEntity
 {
     /**
-     * Returns the identity of the domain entity.
+     * Returns the identity of the entity.
      *
-     * @return AbstractEntityId
+     * @return EntityId
      */
-    abstract public function getId(): AbstractEntityId;
+    abstract public function getId(): EntityId;
 }

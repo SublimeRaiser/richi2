@@ -15,7 +15,7 @@ abstract class AbstractAggregateRoot extends AbstractEntity
     private array $recordedEvents = [];
 
     /**
-     * Returns recorded domain events and removes them from the aggregate root.
+     * Returns recorded events and removes them from the aggregate root.
      *
      * @return array
      */
@@ -28,7 +28,7 @@ abstract class AbstractAggregateRoot extends AbstractEntity
     }
 
     /**
-     * Records the domain event of the aggregate root for subsequent release.
+     * Records the event of the aggregate root for subsequent release.
      *
      * @param EventInterface $event
      *
@@ -38,7 +38,7 @@ abstract class AbstractAggregateRoot extends AbstractEntity
     {
         if (\in_array($event, $this->recordedEvents)) {
             throw new \LogicException(
-                \sprintf('Domain event of type "%s" already recorded.', get_debug_type($event))
+                \sprintf('Event of type "%s" already recorded.', get_debug_type($event))
             );
         }
         $this->recordedEvents[] = $event;
