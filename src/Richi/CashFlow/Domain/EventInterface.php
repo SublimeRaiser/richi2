@@ -7,7 +7,7 @@ namespace Richi\CashFlow\Domain;
 /**
  * @author Nikolay Ryabkov <ZeroGravity.82@gmail.com>
  */
-interface DomainEventInterface
+interface EventInterface
 {
     /**
      * @return \DateTimeImmutable

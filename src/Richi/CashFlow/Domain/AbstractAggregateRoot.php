@@ -7,10 +7,10 @@ namespace Richi\CashFlow\Domain;
 /**
  * @author Nikolay Ryabkov <ZeroGravity.82@gmail.com>
  */
-abstract class AbstractAggregateRoot extends AbstractDomainEntity
+abstract class AbstractAggregateRoot extends AbstractEntity
 {
     /**
-     * @var DomainEventInterface[]|array
+     * @var EventInterface[]|array
      */
     private array $recordedEvents = [];
 
@@ -30,11 +30,11 @@ abstract class AbstractAggregateRoot extends AbstractDomainEntity
     /**
      * Records the domain event of the aggregate root for subsequent release.
      *
-     * @param DomainEventInterface $event
+     * @param EventInterface $event
      *
      * @throws \LogicException when the event of the same type has already been recorded
      */
-    protected function recordEvent(DomainEventInterface $event): void
+    protected function recordEvent(EventInterface $event): void
     {
         if (\in_array($event, $this->recordedEvents)) {
             throw new \LogicException(

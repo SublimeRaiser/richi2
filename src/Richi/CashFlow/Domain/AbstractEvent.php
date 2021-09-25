@@ -7,7 +7,7 @@ namespace Richi\CashFlow\Domain;
 /**
  * @author Nikolay Ryabkov <ZeroGravity.82@gmail.com>
  */
-abstract class AbstractDomainEvent implements DomainEventInterface
+abstract class AbstractEvent implements EventInterface
 {
     /**
      * @var \DateTimeImmutable

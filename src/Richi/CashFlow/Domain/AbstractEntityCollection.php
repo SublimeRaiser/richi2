@@ -7,7 +7,7 @@ namespace Richi\CashFlow\Domain;
 /**
  * @author Nikolay Ryabkov <ZeroGravity.82@gmail.com>
  */
-abstract class AbstractDomainEntityCollection implements \Countable, \IteratorAggregate
+abstract class AbstractEntityCollection implements \Countable, \IteratorAggregate
 {
     /**
      * @param array $entities
@@ -39,9 +39,9 @@ abstract class AbstractDomainEntityCollection implements \Countable, \IteratorAg
     /**
      * Adds the entity to the collection.
      *
-     * @param AbstractDomainEntity $entity
+     * @param AbstractEntity $entity
      */
-    public function add(AbstractDomainEntity $entity): void
+    public function add(AbstractEntity $entity): void
     {
         $this->assertValidType($entity);
         $entityId                  = (string) $entity->getId();
@@ -51,13 +51,13 @@ abstract class AbstractDomainEntityCollection implements \Countable, \IteratorAg
     /**
      * Returns the entity by ID. If no entity found, then a \LogicException will be thrown.
      *
-     * @param AbstractDomainEntityId $entityId
+     * @param AbstractEntityId $entityId
      *
-     * @return AbstractDomainEntity
+     * @return AbstractEntity
      *
      * @throws \LogicException when the entity is not found by ID
      */
-    public function get(AbstractDomainEntityId $entityId): AbstractDomainEntity
+    public function get(AbstractEntityId $entityId): AbstractEntity
     {
         $entityId = (string) $entityId;
         if (!isset($this->entities[$entityId])) {
@@ -74,11 +74,11 @@ abstract class AbstractDomainEntityCollection implements \Countable, \IteratorAg
     /**
      * Checks whether the entity is contained in the collection.
      *
-     * @param AbstractDomainEntity $entity
+     * @param AbstractEntity $entity
      *
      * @return bool
      */
-    public function contains(AbstractDomainEntity $entity): bool
+    public function contains(AbstractEntity $entity): bool
     {
         return \in_array($entity, $this->entities, true);
     }
@@ -86,9 +86,9 @@ abstract class AbstractDomainEntityCollection implements \Countable, \IteratorAg
     /**
      * Removes the entity from the collection.
      *
-     * @param AbstractDomainEntity $entity
+     * @param AbstractEntity $entity
      */
-    public function remove(AbstractDomainEntity $entity): void
+    public function remove(AbstractEntity $entity): void
     {
         $entityId = (string) $entity->getId();
         unset($this->entities[$entityId]);
@@ -150,9 +150,9 @@ abstract class AbstractDomainEntityCollection implements \Countable, \IteratorAg
     /**
      * Sets the internal iterator to the first entity in the collection and returns this entity.
      *
-     * @return AbstractDomainEntity|null
+     * @return AbstractEntity|null
      */
-    public function first(): ?AbstractDomainEntity
+    public function first(): ?AbstractEntity
     {
         $first = \reset($this->entities);
 
@@ -162,9 +162,9 @@ abstract class AbstractDomainEntityCollection implements \Countable, \IteratorAg
     /**
      * Moves the internal iterator position to the next entity and returns this entity.
      *
-     * @return AbstractDomainEntity|null
+     * @return AbstractEntity|null
      */
-    public function next(): ?AbstractDomainEntity
+    public function next(): ?AbstractEntity
     {
         $next = \next($this->entities);
 
@@ -174,9 +174,9 @@ abstract class AbstractDomainEntityCollection implements \Countable, \IteratorAg
     /**
      * Returns the entity of the collection at the current iterator position.
      *
-     * @return AbstractDomainEntity|null
+     * @return AbstractEntity|null
      */
-    public function current(): ?AbstractDomainEntity
+    public function current(): ?AbstractEntity
     {
         $current = \current($this->entities);
 
@@ -186,9 +186,9 @@ abstract class AbstractDomainEntityCollection implements \Countable, \IteratorAg
     /**
      * Sets the internal iterator to the last entity in the collection and returns this entity.
      *
-     * @return AbstractDomainEntity|null
+     * @return AbstractEntity|null
      */
-    public function last(): ?AbstractDomainEntity
+    public function last(): ?AbstractEntity
     {
         $last = \end($this->entities);
 
@@ -205,11 +205,11 @@ abstract class AbstractDomainEntityCollection implements \Countable, \IteratorAg
     /**
      * Checks whether the entity is of a type supported by the collection.
      *
-     * @param AbstractDomainEntity $entity
+     * @param AbstractEntity $entity
      *
      * @throws \InvalidArgumentException when the entity type does not match the collection
      */
-    private function assertValidType(AbstractDomainEntity $entity): void
+    private function assertValidType(AbstractEntity $entity): void
     {
         $supportedEntityClass = $this->getSupportedEntityClass();
         if (!$entity instanceof $supportedEntityClass) {
