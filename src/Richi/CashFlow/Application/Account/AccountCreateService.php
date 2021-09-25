@@ -34,11 +34,11 @@ final class AccountCreateService
     {
         $account = new Account(
             $this->accountRepo->nextId(),
-            $request->getName(),
-            $request->getDescription(),
-            $request->getIcon(),
-            $request->getInitialBalance(),
-            $request->isArchived()
+            $request->name,
+            $request->description,
+            $request->icon,
+            $request->initialBalance,
+            $request->archived
         );
 
         $this->accountRepo->add($account);
