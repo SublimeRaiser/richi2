@@ -12,7 +12,7 @@ abstract class AbstractEntity
     /**
      * Returns the identity of the entity.
      *
-     * @return EntityId
+     * @return AbstractEntityId
      */
-    abstract public function getId(): EntityId;
+    abstract public function getId(): AbstractEntityId;
 }
