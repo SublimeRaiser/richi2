@@ -30,11 +30,11 @@ final class AccountFactory
      * @return Account
      */
     public function create(
-        string $name,
+        string  $name,
         ?string $description,
         ?string $icon,
-        int $initialBalance,
-        bool $archived,
+        int     $initialBalance,
+        bool    $archived,
     ): Account {
         $nextId = new AccountId($this->getIdentityGenerator()->getNextIdentity());
 
