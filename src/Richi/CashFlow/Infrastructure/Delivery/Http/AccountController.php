@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Richi\CashFlow\Infrastructure\Delivery\Http;
 
-use Richi\CashFlow\Application\Account\AccountCreateRequest;
-use Richi\CashFlow\Application\Account\AccountCreateService;
+use Richi\CashFlow\Application\Account\CreateAccount\CreateAccountRequest;
+use Richi\CashFlow\Application\Account\CreateAccount\CreateAccount;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,6 +18,13 @@ use Symfony\Component\Routing\Annotation\Route as Route;
  */
 final class AccountController extends AbstractController
 {
+    /**
+     * @param CreateAccount $createAccount
+     */
+    public function __construct(
+        private CreateAccount $createAccount,
+    ) {}
+
     /**
      * @Route("/", name="account_index")
      *
@@ -33,21 +40,20 @@ final class AccountController extends AbstractController
     /**
      * @Route("/new", name="account_new")
      *
-     * @param Request              $request
-     * @param AccountCreateService $accountCreateService
+     * @param Request $request
      *
      * @return Response
      */
-    public function new(Request $request, AccountCreateService $accountCreateService): Response
+    public function new(Request $request): Response
     {
-        $request = new AccountCreateRequest(
+        $request = new CreateAccountRequest(
             'test_name',
             'test_description',
             null,
             0,
             false
         );
-        $accountCreateService->execute($request);
+        $accountIdString = $this->getCreateAccount()->execute($request);
 
         return new Response('new');
     }
@@ -64,5 +70,13 @@ final class AccountController extends AbstractController
 
 
         return new Response('edit '.$accountId);
+    }
+
+    /**
+     * @return CreateAccount
+     */
+    private function getCreateAccount(): CreateAccount
+    {
+        return $this->createAccount;
     }
 }
