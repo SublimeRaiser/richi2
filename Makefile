@@ -5,13 +5,15 @@ SYMFONY        = $(CLI) ./bin/console
 getargs    = $(wordlist 2,$(words $(MAKECMDGOALS)),$(MAKECMDGOALS))
 escapeagrs = $(subst :,\:,$(1))
 
-.PHONY: dummy tests phpunit cli symfony
+.PHONY: dummy migrations tests phpunit cli symfony
 
 ##
-## Project provisioning ("make init" or just "make")
+## Project maintenance ("make init", "make composer-install", "make db-init" or "make docker-up")
 ## -------------------------------------------------
-all: init
-init: docker-down-clear docker-pull docker-build docker-up composer-install #db-init
+all:
+	@echo 'Please provide a command, for example, "make docker-up"'
+init: docker-down-clear docker-pull docker-build docker-up
+db-init: migrations fixtures
 docker-up:
 	$(DOCKER_COMPOSE) up -d
 docker-down:
@@ -26,7 +28,10 @@ composer-install:
 	$(CLI) composer install
 composer-update:
 	$(CLI) composer update
-#db-init: wait-db migations fixtures
+migrations:
+	$(SYMFONY) doctrine:migrations:migrate --no-interaction
+fixtures:
+	$(SYMFONY) doctrine:fixtures:load --no-interaction
 
 ##
 ## Code quality tests ("make tests")
@@ -42,7 +47,7 @@ ifeq (phpunit,$(firstword $(MAKECMDGOALS)))
     $(eval $(PHPUNIT_ARGS_ESCAPED):dummy;@:)
 endif
 phpunit:
-	$(CLI) ./vendor/bin/phpunit $(PHPUNIT_ARGS)
+	$(CLI) ./vendor/bin/phpunit $(PHPUNIT_ARGS) $(-*-command-variables-*-)
 
 ##
 ## Run CLI command ("make -- cli ls -la /app")
@@ -53,10 +58,10 @@ ifeq (cli,$(firstword $(MAKECMDGOALS)))
     $(eval $(CLI_ARGS_ESCAPED):dummy;@:)
 endif
 cli:
-	$(CLI) $(CLI_ARGS)
+	$(CLI) $(CLI_ARGS) $(-*-command-variables-*-)
 
 ##
-## Run Symfony console command ("make symfony doctrine:migrations:migrate")
+## Run Symfony console command ("make sf debug:container log" or "make -- sf doctrine:migrations:migrate --em=mysql_main2")
 ## -----------------------------------------------
 ifeq (sf,$(firstword $(MAKECMDGOALS)))
     SYMFONY_ARGS         := $(call getargs)
@@ -64,4 +69,4 @@ ifeq (sf,$(firstword $(MAKECMDGOALS)))
     $(eval $(SYMFONY_ARGS_ESCAPED):dummy;@:)
 endif
 sf:
-	$(SYMFONY) $(SYMFONY_ARGS)
+	$(SYMFONY) $(SYMFONY_ARGS) $(-*-command-variables-*-)
