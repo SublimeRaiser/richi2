@@ -60,7 +60,7 @@ abstract class AbstractEntityId
     private function assertNotEmpty(string $value): void
     {
         if ($value === '') {
-            throw new \InvalidArgumentException('Entity ID cannot be empty string.');
+            throw new \InvalidArgumentException('Domain entity ID cannot be empty string.');
         }
     }
 }
