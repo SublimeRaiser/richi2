@@ -50,7 +50,6 @@ final class Amount
     protected function assertValidValue(int $value): void
     {
         $this->assertNotZero($value);
-        $this->assertNotNegative($value);
     }
 
     /**
@@ -62,18 +61,6 @@ final class Amount
     {
         if ($value === 0) {
             throw new \InvalidArgumentException('Amount value cannot be zero.');
-        }
-    }
-
-    /**
-     * @param int $value
-     *
-     * @throws \InvalidArgumentException when the amount value is negative
-     */
-    private function assertNotNegative(int $value): void
-    {
-        if ($value < 0) {
-            throw new \InvalidArgumentException('Amount value cannot be negative.');
         }
     }
 }

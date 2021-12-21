@@ -26,13 +26,6 @@ class AmountTest extends TestCase
         new Amount(0);
     }
 
-    public function testItFailsWithNegativeValue(): void
-    {
-        $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage('Amount value cannot be negative.');
-        new Amount(-100);
-    }
-
     public function testItStringifyable(): void
     {
         $amount = new Amount(12345);
